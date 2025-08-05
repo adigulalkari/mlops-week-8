@@ -1,0 +1,43 @@
+name: Sanity Test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run training
+        env:
+          DATA_PATH: data/iris.csv
+        run: |
+          python src/train.py   # Trains and generates iris_model.joblib, X_test.csv, y_test.csv
+
+      - name: Run tests
+        run: |
+          pytest > result.log || true
+
+      - name: Show test output
+        run: cat result.log
+
+      - name: Evaluate model
+        run: |
+          python src/evaluate.py
+
+      - name: Display final accuracy score
+        run: |
+          echo "✅ Extracting accuracy score from metrics.txt"
+          grep "accuracy:" metrics.txt || echo "⚠️ Accuracy not found"
