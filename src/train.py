@@ -7,7 +7,7 @@ import os
 
 
 def main():
-    data_path = os.getenv("DATA_PATH", "data/iris.csv")
+    data_path = os.getenv("DATA_PATH", "data/iris_poisoned_10.csv")
     df = pd.read_csv(data_path)
     X = df.iloc[:, :-1].values
     y = df.iloc[:, -1].values
