@@ -3,12 +3,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score
 import joblib
-from dotenv import load_dotenv
 import os
 
 
 def main():
-    load_dotenv()
     data_path = os.getenv("DATA_PATH", "data/iris.csv")
     df = pd.read_csv(data_path)
     X = df.iloc[:, :-1].values
