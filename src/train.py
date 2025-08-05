@@ -29,11 +29,7 @@ def main():
     pd.DataFrame(X_test).to_csv("X_test.csv", index=False)
     pd.DataFrame(y_test).to_csv("y_test.csv", index=False)
 
-    with open("metrics.txt", "w") as f:
-        f.write(f"accuracy: {acc:.4f}\n")
-        f.write(report)
-
-    print("✅ Training complete. Model and metrics saved.")
+    print("✅ Training complete")
 
 if __name__ == "__main__":
     main()

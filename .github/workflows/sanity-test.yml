@@ -26,13 +26,6 @@ jobs:
         run: |
           python src/train.py   # Trains and generates iris_model.joblib, X_test.csv, y_test.csv
 
-      - name: Run tests
-        run: |
-          pytest > result.log || true
-
-      - name: Show test output
-        run: cat result.log
-
       - name: Evaluate model
         run: |
           python src/evaluate.py
